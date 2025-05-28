@@ -1,0 +1,29 @@
+name: API Secret Test
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  test-secret:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Display masked secret
+        run: |
+          echo "Your API key is being used (masked for security):"
+          echo "Key used: ${{ secrets.API_KEY }}"
+          echo "Workflow executed successfully!"
+          
+      - name: Verify secret value
+        run: |
+          # This condition checks if the secret matches expected value
+          if [ "${{ secrets.API_KEY }}" == "Im_Shivani_123" ]; then
+            echo "✅ Secret is correct!"
+          else
+            echo "❌ Secret does not match"
+            exit 1
+          fi
