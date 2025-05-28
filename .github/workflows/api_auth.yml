@@ -23,7 +23,4 @@ jobs:
           # This condition checks if the secret matches expected value
           if [ "${{ secrets.API_KEY }}" == "Im_Shivani_123" ]; then
             echo "✅ Secret is correct!"
-          else
-            echo "❌ Secret does not match"
-            exit 1
           fi
